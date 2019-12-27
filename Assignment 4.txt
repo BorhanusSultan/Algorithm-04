@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int max(int p, int q){
+return (p > q)? p : q;
+}
+
+int Knapsack(int W, int wt[], int val[], int a)
+{
+ if (a == 0 || W == 0)
+ return 0;
+if (wt[a-1] > W)
+ return Knapsack(W, wt, val, a-1);
+
+else return max( val[a-1] + Knapsack(W-wt[a-1], wt, val, a-1),
+     Knapsack(W, wt, val, a-1) );
+}
+int main()
+{
+ int val[] = {100, 200, 300};
+ int wt[] = {20, 20, 30};
+ int W=80;
+ cout<<"Given Values: 100, 200, 300 "<<endl;
+ cout<<"Given Weights are: 20, 20, 30 "<<endl;
+ int w;
+ int a = sizeof(val)/sizeof(val[0]);
+ cout<<Knapsack(W, wt, val, a);
+ return 0;
+}
